@@ -1,5 +1,5 @@
-# OIS 2022/2023
-
-## Domača naloga
-
-Navodila so na voljo v [skripti](https://teaching.lavbic.net/OIS/2022-2023/DN.html).
+# FRI Izletnik
+- Ta spletna aplikacija je projekt predmeta Osnove informacijskih sistemov.
+- Del aplikacije je bil predpripravljen s strani fakultete.
+- Nato je bila aplikacija po navodilih dopolnjena z različnimi funkcionalnostmi.
+- Sam sem nato implementiral še nekaj dodatnih funkcionalnosti (Katere? preberi [tukaj]()).
