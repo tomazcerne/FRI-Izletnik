@@ -1,0 +1,240 @@
+<div class="container text-center pb-0">
+    <div class="row">
+        <div class="col-md-6">
+            <h3><i class="fa-solid fa-filter-circle-dollar"></i>Pregled dopustov</h3>
+            <div class="row">
+                <div class="col">
+                    <input type="text" id="iskalniNiz" class="form-control d-inline-block rob senca"
+                           placeholder="iskalni niz" style="margin-bottom: 14px;"/>
+                </div>
+            </div>
+            <div>
+                <form
+                        action="/izpisiRacunBaza"
+                        method="post"
+                        enctype="multipart/form-data"
+                >
+                    <div class="form-group">
+                        <select
+                                size="10"
+                                id="seznamRacunov"
+                                name="seznamRacunov"
+                                class="form-control form-control-sm odmik rob senca"
+                        >
+                            {{#each seznamRacunov as |racun|}}
+                                <option
+                                        value="{{racun.InvoiceId}}"
+                                        customerId="{{racun.CustomerId}}"
+                                        selected
+                                >
+                                    {{racun.Naziv}}
+                                </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input
+                                type="submit"
+                                class="btn btn-secondary btn-sm"
+                                value="Podrobnosti izleta"
+                        />
+                    </div>
+                </form>
+                <div class="help-block"><small id="skupnaCenaIzleta"></small></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3><i class="fa-regular fa-hand-point-right"></i>Izbira uporabnika</h3>
+            <div>
+                <select
+                        size="13"
+                        id="seznamStrank"
+                        name="seznamStrank"
+                        class="form-control form-control-sm odmik rob senca"
+                >
+                    {{#each seznamStrank as |stranka|}}
+                        <option value="{{stranka.CustomerId}}">
+                            {{{stranka.Country}}}
+                            |
+                            {{stranka.FirstName}}
+                            {{stranka.LastName}},
+                            {{stranka.Email}}
+                            {{#if stranka.Company}}
+                                ({{stranka.Company}})
+                            {{/if}}
+                        </option>
+                    {{/each}}
+                </select>
+            </div>
+            <br/>
+        </div>
+
+        <div class="col-md-6">
+            <h3><i class="fa-solid fa-table"></i>Statistika v tabeli</h3>
+            <span>V tabeli je navedena osnovna statistika o destinacijah ter njihovih lastnosti.</span>
+
+            <table>
+                <tr>
+                    <td class = "zunanji" rowspan="6">Lastnosti</td>
+                    <td class = "zunanji"></td>
+                    <td class = "zunanji" colspan="3">Destinacije</td>
+                </tr>
+                <tr>
+                    <td class="diagonala"></td>
+                    <th class="spodnjiRob">Turistične atrakcije</th>
+                    <th class="spodnjiRob">Živalski vrtovi</th>
+                    <th class="spodnjiRob">Hostli</th>
+                </tr>
+                <tr>
+                    <th class="desniRob">Vsi</th>
+                    <td class="notranji">{{ atrakcije.vsi }}</td>
+                    <td class="notranji">{{ zoo.vsi }}</td>
+                    <td class="notranji">{{ hostli.vsi }}</td>
+                </tr>
+                <tr>
+                    <th class="desniRob">Izven Ljubljane</th>
+                    <td class="notranji">{{ atrakcije.izvenLjubljane }}</td>
+                    <td class="notranji">{{ zoo.izvenLjubljane }}</td>
+                    <td class="notranji">{{ hostli.izvenLjubljane }}</td>
+                </tr>
+                <tr>
+                    <th class="desniRob">Spletna stran</th>
+                    <td class="notranji">{{ atrakcije.spletnaStran }}</td>
+                    <td class="notranji">{{ zoo.spletnaStran }}</td>
+                    <td class="notranji">{{ hostli.spletnaStran }}</td>
+                </tr>
+                <tr>
+                    <th class="desniRob">Wikidata</th>
+                    <td class="notranji">{{ atrakcije.wikidata }}</td>
+                    <td class="notranji">{{ zoo.wikidata }}</td>
+                    <td class="notranji">{{ hostli.wikidata }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6 etherium">
+            <h3><i class='fa-brands fa-ethereum'></i> Etherium veriga blokov</h3>
+
+            <button type="button" id="prijava"
+                    data-bs-toggle="modal" data-bs-target="#modalno-okno-prijava">Prijava z
+                <i class='fa-brands fa-ethereum'></i> računom
+            </button>
+            <button type="button" id="gumb-doniraj-start" data-bs-toggle="modal"
+                    data-bs-target='#modalno-okno-donacije' disabled><i class="fa-solid fa-hand-holding-dollar"></i>
+                Všečkaj aplikacijo
+            </button>
+            <button type="button" data-bs-toggle="modal"
+                    data-bs-target="#modalno-okno-seznam-donacij"><i class="fa-solid fa-list-ul"></i> Prikaz všečkov
+            </button>
+            <div id="eth-racun" class="h6 ms-3 opacity-50 mt-1">Račun ni izbran</div> 
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.9.0/web3.min.js"></script>
+<script src="skripte/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="skripte/prijava.js"></script>
+
+<!-- Modalno okno za donacijo -->
+<div class="modal fade" id="modalno-okno-donacije" data-bs-backdrop="static" tabindex="-1"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Izvedi donacijo iz prijavljenega računa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="col-form-label">Denarnica pošiljatelja:</label>
+                        <span class="text-muted" id="posiljatelj"></span>
+
+                        <label for="denarnica-prejemnika" class="col-form-label">Denarnica prejemnika:</label>
+                        <input type="text" class="form-control" id="denarnica-prejemnika">
+                    </div>
+                    <div class="mb-3">
+                        <label for="donacija" class="col-form-label">Količina Ethereum <i
+                                class='fa-brands fa-ethereum'></i> sredstev:</label>
+                        <input type="number" class="form-control" id="donacija" placeholder="Vnesite vrednost med 0.1 in 1">
+                    </div>
+                </form>
+                <div id="napakaDonacija"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
+                <button id="potrdi-donacijo" type="button" class="btn btn-primary">Potrdi donacijo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modalno okno za prijavo računa -->
+<div class="modal fade" id="modalno-okno-prijava" data-bs-backdrop="static" tabindex="-1"
+     aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Prijava z Ethereum
+                    <i class='fa-brands fa-ethereum'></i> računom</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="denarnica" class="col-form-label">Denarnica:</label>
+                        <input type="text" class="form-control" id="denarnica">
+                    </div>
+                    <div class="mb-3">
+                        <label for="geslo" class="col-form-label">Geslo:</label>
+                        <input type="password" class="form-control" id="geslo">
+                    </div>
+                </form>
+                <div id="napakaPrijava"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
+                <button id="gumb-potrdi-prijavo" type="button" class="btn btn-primary" disabled>Prijava</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modalno okno za pregled donacij -->
+<div class="modal fade" id="modalno-okno-seznam-donacij" data-bs-backdrop="static" tabindex="-1"
+     aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Seznam donacij</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Zgoščena vrednost transakcije</th>
+                        <th scope="col">Pošiljatelj</th>
+                        <th scope="col">Prejemnik</th>
+                        <th scope="col">Višina donacije</th>
+                    </tr>
+                    </thead>
+                    <tbody id="seznam-donacij">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>0x0...000</td>
+                            <td>0x0...000</td>
+                            <td>0x0...000</td>
+                            <td>0.1 <i class='fa-brands fa-ethereum'></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

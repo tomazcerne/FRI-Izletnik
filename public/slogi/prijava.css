@@ -1,0 +1,34 @@
+.form-group {
+  margin-bottom: 10px;
+}
+
+.diagonala {
+  background: linear-gradient(to top left, #CCF3D5 60%, #E4FDEA 40%);
+}
+
+table {
+  margin: auto;
+}
+
+.zunanji {
+  color: darkgray;
+  font-style: italic;
+  text-align: center;
+  background-color: #E4FDEA;
+}
+.spodnjiRob {
+  border-bottom: green dotted 3px;
+}
+.desniRob {
+  border-right: green dotted 3px;
+}
+.notranji {
+  border-bottom: darkgray solid 1px;
+  border-right: darkgray solid 1px;
+}
+td {
+  padding: 3px;
+}
+th {
+  padding: 6px;
+}

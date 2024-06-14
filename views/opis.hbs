@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="card text-center m-3 mb-4">
+    <div class="card-header">
+      <h4>
+        <i class="fa-solid fa-pencil"></i>Opis ideje, ki jo nova
+        funkcionalnost podpira
+      </h4>
+    </div>
+    <div class="card-body">
+      <!-- ZAČETEK: Opis ideje, ki jo funkcionalnost podpira -->
+      <p>
+        Prijavljen uporabnik bo imel pri pregledu destinacij, ki jih je dodal 
+        v košarico, možnost, da s klikom na ikono srca označi destinacijo kot 
+        priljubljeno. Ob ponovnem kliku na ikono pa se destinacija odstrani s 
+        seznama priljubljenih. Seznam se hrani v podatkovni bazi (Teaching API). 
+        Uporabnik ima pri pregledu seznama možnost, da za izbrano destinacijo 
+        pridobi vremenske podatke, in sicer 4-dnevno vremensko napoved (klik na 
+        ikono vremena) ter grafični prikaz gibanja temperatur (klik na ikono 
+        grafa). Za prve 3 uporabnike s seznama so v bazi že pripravljeni testni 
+        podatki o njihovih priljubljenih destinacijah. Namen funkcionalnosti je, da 
+        lahko uporabnik trajno zabeleži svoje najljubše destinacije, hkrati pa 
+        mu je na voljo vpogled v vremenske podatke, kar je koristno v primeru 
+        načrtovanja izleta.
+      </p>
+      <p class="text-muted mb-0">Opis naj ne bo daljši od 200 besed.</p>
+      <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
+    </div>
+  </div>
+
+  <div class="card text-center m-3 mb-4">
+    <div class="card-header">
+      <h4>
+        <i class="fa-solid fa-pencil"></i>Uporabljeni zunanji viri podatkov
+      </h4>
+    </div>
+    <div class="card-body">
+      <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
+      <p class="mb-0">
+        Za zunanji vir podatkov uporabljam neposredni API klic storitve 
+        <a target="_blank" href="https://www.weatherbit.io/features">Weatherbit</a>, 
+        ki vrne JSON podatke o vremenu na določeni geografski lokaciji. Podatki se pridobivajo 
+        preko funkcionalnosti Vremenske napovedi oz. Weather Forecasts. Možnih je 50 klicov na 
+        dan. Namen uporabe je ažuren prikaz vremenskih informacij uporabniku, ki bi želel obiskati 
+        določeno destinacijo.        
+      </p>
+      <!-- KONEC: Uporabljeni zunanji viri podatkov -->
+    </div>
+  </div>
+
+  <div class="card text-center m-3 mb-4">
+    <div class="card-header">
+      <h4>
+        <i class="fa-solid fa-pencil"></i>Master/detail načrtovalski vzorec
+      </h4>
+    </div>
+    <div class="card-body">
+      <!-- ZAČETEK: Master/detail načrtovalski vzorec -->
+      <p class="mb-0">
+        Na začetku uporabnik pregleduje svoje priljubljene destinacije, ki 
+        so prikazane strnjeno v obliki seznama (master). Ob zahtevi uporabnika 
+        (klik na ikono vreme, graf) aplikacija pridobi dodatne podatke in 
+        jih prikaže neposredno pod elementom seznama (detail). Ob ponovnem kliku
+        na ikono se podatki skrijejo. Namen je boljša preglednost in izpis podrobnosti
+        le na zahtevo uporabnika. S tem se izognemo obdelavi vseh podatkov naenkrat in 
+        posledično aplikacija deluje hitreje.
+      </p>
+      <!-- KONEC: Master/detail načrtovalski vzorec -->
+    </div>
+  </div>
+
+  <div class="card text-center m-3">
+    <div class="card-header">
+      <h4>
+        <i class="fa-solid fa-pencil"></i>Uporabljena tehnika za
+        vizualizacijo podatkov
+      </h4>
+    </div>
+    <div class="card-body">
+      <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
+      <p class="mb-0">
+        S pomočjo knjižnice 
+        <a href="https://canvasjs.com/" target="_blank">canvasJS</a> 
+        bom prikazal podatke o temperaturah v naslednjih 7 dneh za izbrano 
+        destinacijo, in sicer v obliki črtnega diagrama (Line Chart). Prikaz 
+        je dostopen pri pregledu priljubljenih destinacij ob kliku na ikono grafa.
+      </p>
+      <!-- KONEC: Uporabljeni zunanji viri podatkov -->
+    </div>
+  </div>
+</div>

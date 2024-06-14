@@ -1,0 +1,109 @@
+#kosarica {
+    margin-bottom: 10px;
+}
+
+#podrobnosti {
+    margin-top: 20px;
+}
+
+.destinacija button {
+    width: 80%;
+    margin-bottom: 5px;
+}
+
+.obicajno {
+    color: black;
+}
+
+#mapa_id {
+    height: 400px;
+}
+
+.srce {
+    padding-left: 8px;
+}
+.srce:hover{
+    font-size: larger;
+    cursor: pointer;
+}
+.praznoSrce {
+    color: gray;
+}
+.polnoSrce {
+    color: red;
+}
+
+#seznamPriljubljenih {
+    border-top: solid 2px lightgray;
+}
+#seznamPriljubljenih p{
+    margin: 10px;
+}
+.priljubljena {
+    border-bottom: solid 2px lightgray;
+    padding: 10px 0;
+}
+.priljubljena span {
+    padding: 0 15px;
+}
+.priljubljena .ime {
+    display: inline-block;
+    width: 300px;
+}
+.vreme:hover, .graf:hover{
+    font-size: larger;
+    color: #007FFF;
+    cursor: pointer;
+}
+.zapri:hover{
+    font-size: larger;
+    color: red;
+}
+.dan {
+    display: inline-block;
+}
+.vremeIkona {
+    width: 70px;
+}
+.imeKraja, .naslovGrafa{
+    border-top: lightgray dashed 1px;
+    margin-top: 10px;
+    padding: 5px;
+}
+.datum,.vremeOpis{
+    font-size: 12px;
+}
+.imeDneva {
+    font-size: 15px;
+}
+.dnevi {
+    background-color: aliceblue;
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border: solid transparent;
+    border-radius: 10px;
+}
+
+.dan {
+    width: 100px;
+    padding: 0 2px;
+    border-left: solid lightgray 1px;
+    border-right: solid lightgray 1px;
+    margin: 5px 10px;
+}
+.temperatura span {
+    padding: 0;
+}
+.temperatura {
+    font-size: 12px;
+}
+.nizka {
+    color: blue;
+}
+.visoka {
+    color: red;
+}
+.canvas {
+    height: 250px;
+}
