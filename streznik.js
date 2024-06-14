@@ -8,6 +8,9 @@ const pb = new sqlite3.Database("DestinationInvoice.sl3");
 
 // Priprava dodatnih knjižnic
 const formidable = require("formidable");
+const fs = require("fs");
+const path = require("path");
+const bodyParser = require("body-parser");
 
 // Priprava strežnika
 const express = require("express");
@@ -182,8 +185,17 @@ function vrniHtmlZastavico(trenutnaStranka, povratniKlic) {
             povratniKlic(kratica);
         })
         .catch(err => {console.log(err)});
-    });
-    
+    });   
+}
+// ažuriraj json podatke v datotečni sistem podatki
+const azurirajPodatke = (idStranke, podatki, povratniKlic) => {
+    let filePath = path.join(__dirname, "podatki", idStranke + ".json");
+    podatki = JSON.stringify(podatki);
+    fs.writeFile(filePath, podatki, "utf8", (napaka) => { povratniKlic(napaka) });
+}
+const vrniPodatke = (idStranke, povratniKlic) => {
+    let filePath = path.join(__dirname, "podatki", idStranke + ".json");
+    fs.readFile(filePath, "utf8", (napaka, podatki) => { povratniKlic(napaka, podatki) });
 }
 
 // Prikaz začetne strani
@@ -449,6 +461,18 @@ streznik.get("/opis", (zahteva, odgovor) => {
 streznik.get("/nacrt", (zahteva, odgovor) => {
     odgovor.render("nacrt", {
         prijavniGumb: "Prijava uporabnika", podnaslov: "Načrt",
+    });
+});
+
+streznik.use(bodyParser.json());
+streznik.put("/podatki/azuriraj/:idStranke", (zahteva, odgovor) => {
+    azurirajPodatke(zahteva.params.idStranke, zahteva.body, (napaka) => {
+        if (napaka) odgovor.sendStatus(500); else odgovor.sendStatus(200);
+    });
+});
+streznik.get("/podatki/vrni/:idStranke", (zahteva, odgovor) => {
+    vrniPodatke(zahteva.params.idStranke, (napaka, podatki) => {
+        if (napaka) odgovor.sendStatus(500); else odgovor.send(JSON.parse(podatki));
     });
 });
 

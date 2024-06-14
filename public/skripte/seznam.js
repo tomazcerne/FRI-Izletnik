@@ -1,8 +1,9 @@
 //var idStranke;
 var priljubljeneDestinacije = [];
 
-var baza = "tomazcerne";
-var baseUrl = 'https://teaching.lavbic.net/api/OIS/baza/'+ baza;
+//var baza = "tomazcerne";
+//var baseUrl = 'https://teaching.lavbic.net/api/OIS/baza/'+ baza;
+var baseUrl = "";
 
 var weatherAPIurl = "https://api.weatherbit.io/v2.0";
 var APIKey = "6e4aa0d252bb451c9778439f2cb6b959";
@@ -248,7 +249,7 @@ const pridobiIzBaze = (callback) => {
 
 const posodobiBazo = () => {
   $.ajax({
-    url: baseUrl + '/podatki/azuriraj?kljuc='+ idStranke +'&elementTabele=false',
+    url: baseUrl + '/podatki/azuriraj/'+ idStranke,
     type: "PUT",
     contentType: 'application/json',
     data: JSON.stringify(priljubljeneDestinacije),
