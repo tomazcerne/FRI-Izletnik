@@ -4,3 +4,4 @@
 - Nato je bila aplikacija po navodilih dopolnjena z različnimi funkcionalnostmi.
 - Sam sem nato implementiral še nekaj dodatnih funkcionalnosti (Katere? preberi [tukaj](https://fri-izletnik.onrender.com/opis)).
 - Za dostop do spletne strani kliknite [tukaj](https://fri-izletnik.onrender.com).
+  - Včasih se spletna stran nalaga nekoliko dlje (počakajte minuto, da se strežnik zbudi ).
